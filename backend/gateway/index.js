@@ -14,9 +14,12 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL, // for access frontend Url request
-    credentials: true, // to access cookies
-  }),
+    origin: [
+      "http://localhost:5173",
+      "https://fresher-ai-ivory.vercel.app",
+    ],
+    credentials: true,
+  })
 );
 
 app.use(morgan("dev")); // It shows any gatway request on terminal
