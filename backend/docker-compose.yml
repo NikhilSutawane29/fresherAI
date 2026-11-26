@@ -1,0 +1,10 @@
+
+# we want to run redis image inside a container in a "services"
+services:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379 # we give hostport: containerport(to run redis image in which container port)
+
+
+
