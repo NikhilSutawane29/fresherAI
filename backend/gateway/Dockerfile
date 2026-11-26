@@ -8,7 +8,7 @@ RUN npm install
 
 COPY ./gateway/package*json ./gateway/
 
-RUN npm install
+RUN cd gateway && npm install
 
 COPY gateway ./gateway
 
@@ -18,5 +18,4 @@ WORKDIR /app/gateway
 
 EXPOSE 7000
 
-# to run our server 
-CMD [ "npm", "start" ]   
+CMD [ "npm", "start" ]
