@@ -1,9 +1,8 @@
- 
-import { cert, initializeApp } from "firebase-admin/app"
+import fs from "fs";
 
-import serviceAccount from "../serviceAccKey.json" with {type: "json"}
+// Uses Render's Secret File if deployed, otherwise uses your local file
+const keyPath = fs.existsSync("/etc/secrets/serviceAccKey.json")
+  ? "/etc/secrets/serviceAccKey.json"
+  : new URL("../serviceAccKey.json", import.meta.url);
 
-// we initialize app because we want to verify our token
-export const app = initializeApp({
-    credential: cert(serviceAccount)
-})
+const serviceAccount = JSON.parse(fs.readFileSync(keyPath, "utf8"));
