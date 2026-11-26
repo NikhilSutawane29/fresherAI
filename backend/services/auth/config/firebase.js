@@ -1,4 +1,4 @@
-import admin from "firebase-admin";
+import { initializeApp, cert } from "firebase-admin/app";
 import fs from "fs";
 
 const keyPath = fs.existsSync("/etc/secrets/serviceAccKey.json")
@@ -7,6 +7,6 @@ const keyPath = fs.existsSync("/etc/secrets/serviceAccKey.json")
 
 const serviceAccount = JSON.parse(fs.readFileSync(keyPath, "utf8"));
 
-export const app = admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+export const app = initializeApp({
+  credential: cert(serviceAccount),
 });
