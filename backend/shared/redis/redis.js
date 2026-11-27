@@ -1,9 +1,12 @@
 import Redis from "ioredis";
 
-const redis = new Redis(process.env.REDIS_URL, {
+const redisUrl = process.env.REDIS_URL || "";
+
+const redis = new Redis(redisUrl, {
   enableReadyCheck: false,
   maxRetriesPerRequest: null,
   commandTimeout: 30000,
+  ...(redisUrl.startsWith("rediss://") ? { tls: {} } : {}),
 });
 
 redis.on("ready", () => {
