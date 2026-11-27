@@ -2,6 +2,7 @@ import Redis from "ioredis";
 
 const redis = new Redis(process.env.REDIS_URL, {
   lazyConnect: true,
+  enableReadyCheck: false,
 });
 
 redis.on("connect", () => {
