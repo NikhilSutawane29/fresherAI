@@ -2,7 +2,7 @@ import { app } from "../config/firebase.js";
 import { getAuth } from "firebase-admin/auth";
 import User from "../models/user.model.js";
 import crypto from "crypto";
-import redis from "../../../shared/redis/redis.js";
+import redis, { waitForRedisReady } from "../../../shared/redis/redis.js";
 
 // Google auth controller
 export const GoogleAuth = async (req, res) => {
@@ -42,6 +42,7 @@ export const GoogleAuth = async (req, res) => {
     // ⭐ TO Access Current User, so we use Redis to create a Session
     // we get sessionID from cookies
     // we set a Session through session id
+    await waitForRedisReady();
     await redis.set(
       `session:${sessionId}`,
       JSON.stringify({
