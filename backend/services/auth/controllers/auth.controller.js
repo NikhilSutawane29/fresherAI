@@ -70,6 +70,7 @@ export const GoogleAuth = async (req, res) => {
       message: error.message,
     });
   }
+};
 
 // Logout controller
 export const logOut = async (req, res) => {
