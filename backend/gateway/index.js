@@ -16,7 +16,6 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://fresher-ai-ivory.vercel.app",
     ],
     credentials: true,
   })
