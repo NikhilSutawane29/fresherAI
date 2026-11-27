@@ -12,9 +12,14 @@ import { proxyWithHeaders } from "./utils/proxyWithHeaders.js";
 const app = express();
 app.use(express.json());
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: allowedOrigins,
     credentials: true,
   })
 );
