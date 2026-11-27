@@ -2,7 +2,8 @@ import Redis from "ioredis";
 
 const redis = new Redis(process.env.REDIS_URL, {
   enableReadyCheck: false,
-  maxRetriesPerRequest: 3,
+  maxRetriesPerRequest: null,
+  commandTimeout: 30000,
 });
 
 redis.on("connect", () => {
