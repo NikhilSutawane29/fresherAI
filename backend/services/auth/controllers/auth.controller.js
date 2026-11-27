@@ -64,9 +64,12 @@ export const GoogleAuth = async (req, res) => {
 
     return res.status(200).json({ success: true, user });
   } catch (error) {
-    return res.status(500).json("Google auth error", error);
+    console.error("Google auth error:", error);
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
-};
 
 // Logout controller
 export const logOut = async (req, res) => {
