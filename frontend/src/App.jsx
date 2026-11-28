@@ -15,6 +15,7 @@ import InterviewPage from "../pages/InterviewPage";
 import InterviewReport from "../pages/InterviewReport";
 import Roadmap from "../pages/Roadmap";
 import Billing from "../pages/Billing";
+import api from "./utils/axios";
 
 const App = () => {
   const [user, setUser] = useState(null); // for current user
@@ -22,6 +23,10 @@ const App = () => {
   const dispatch = useDispatch()  // for getting resume data through redux
 
   // when we cannot find curr user so loading is true, otherwise it would be false
+
+  useEffect(() => {
+    api.get("/api/wake").catch(() => {});
+  }, []);
 
 
 // we get current user whenever we are loggedin

@@ -33,6 +33,22 @@ app.get("/", (req, res) => {
   res.send("Hello from Gateway");
 });
 
+app.get("/api/wake", async (req, res) => {
+  const services = [
+    process.env.AUTH_SERVICE_URL,
+    process.env.RESUME_SERVICE_URL,
+    process.env.INTERVIEW_SERVICE_URL,
+    process.env.ROADMAP_SERVICE_URL,
+    process.env.BILLING_SERVICE_URL,
+  ].filter(Boolean);
+
+  await Promise.allSettled(
+    services.map((url) => fetch(url).catch(() => null))
+  );
+
+  res.status(200).json({ status: "all services awake" });
+});
+
 // Microservice - any request comes on this "Gateway" and then they decide to send those request on particular services
 
 // 1 - here req comes on this -> /api/auth -> Gateway sends those re to "Auth service"
